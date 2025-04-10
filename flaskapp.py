@@ -40,7 +40,19 @@ def display_users():
     users_list = (('John','Doe','Comedy'),('Jane', 'Doe','Drama'))
     return render_template('display_users.html', users = users_list)
 
+@app.route('/delete-user', methods=['GET', 'POST'])
+def delete_users():
+    if request.method == 'POST':
+        
+        name = request.form['name']
 
+        print("Name has been deleted:", name)
+        
+        flash('User deleted successfully!', 'warning')
+
+        return redirect(url_for('home'))
+    else:
+        return render_template('delete_user.html')
 # these two lines of code should always be the last in the file
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
